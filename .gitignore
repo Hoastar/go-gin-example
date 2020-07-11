@@ -1,0 +1,4 @@
+## git-ignore rules
+*.log
+*.ini
+/runtime

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+// 定义包名
+package protobuf;
+
+
+// 定义数据结构，message 类似于 golang中的 struct
+message User {
+    string name = 1;
+    int32 age = 24;
+}
