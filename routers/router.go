@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 
+	"github.com/hoastar/go-gin-example/middleware/cookie"
 	"github.com/hoastar/go-gin-example/middleware/protobuf"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -46,6 +47,18 @@ func InitRouter() *gin.Engine {
 	adminGroup.GET("/index", func(c *gin.Context) {
 		c.JSON(200, "后台首页")
 	})
+
+	r.GET("/login", func(c *gin.Context) {
+		// 设置cookie
+		c.SetCookie("testcookie", "q1w2e3r4", 60, "/", "127.0.0.1", false, true)
+
+		// 返回信息
+		c.IndentedJSON(200, "Login success!")
+	})
+
+	r.GET("/home", cookie.AuthCookie(), func(c *gin.Context) {
+		c.IndentedJSON(200, gin.H{"data": "home"})
+	} )
 
 
 
